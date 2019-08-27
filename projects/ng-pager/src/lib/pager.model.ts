@@ -14,7 +14,7 @@ export class Pager {
 
     constructor(totalRecords?: number, pageIndex?: number, pageSize?: number) {
         this.pageIndex = pageIndex || 0;
-        this.pageSize = pageSize || 3;
+        this.pageSize = pageSize || 10;
         this.totalRecords = totalRecords || 0;
 
         this.update();
