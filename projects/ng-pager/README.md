@@ -1,5 +1,5 @@
 
-# NgxPagerLibrary
+# NgPager
   
 ### Installation
 	npm install ng-pager --save
