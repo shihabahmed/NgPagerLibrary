@@ -1,0 +1,30 @@
+<ng-container *ngIf="pager.totalRecords > pager.pageSize">
+    <ng-container *ngIf="paged">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button [disabled]="!pager.hasPrevious ? true : null" class="btn btn-sm btn-info btn-nav btn-prev" [class.disabled]="!pager.hasPrevious"
+                    type="button" (click)="changePage(pager.pageIndex - 1)">
+                    <span>&laquo;</span>
+                </button>
+            </div>
+            <input #page type="number" [value]="pager.currentPage" class="form-control input-sm weight-500" (focus)="page.select()"
+                (keyup.enter)="changePage(+page.value - 1)" (blur)="page.value = pager.currentPage">
+            <div class="input-group-append">
+                <button [disabled]="!pager.hasNext ? true : null" class="btn btn-sm btn-info btn-nav btn-next" [class.disabled]="!pager.hasNext"
+                    type="button" (click)="changePage(pager.pageIndex + 1)">
+                    <span>&raquo;</span>
+                </button>
+            </div>
+        </div>
+        <div class="info">
+            Showing: {{pager.records.from}} - {{pager.records.to}} of {{pager.totalRecords}}
+        </div>
+    </ng-container>
+    <div *ngIf="!paged && pager.hasNext" class="load-more-wrapper text-center">
+        <div *ngIf="loading" color="blue" style="margin: 5px;">Loading...</div>
+        <a *ngIf="!loading" href="javascript:;" class="load-more" (click)="changePage(pager.pageIndex + 1)">
+            <i class="fa fa-caret-up"></i>
+            Load more
+        </a>
+    </div>
+</ng-container>

@@ -1,0 +1,7 @@
+<table>
+    <tr *ngFor="let char of chars">
+        <td>{{char.pos}}</td>
+        <td>{{char.char}}</td>
+    </tr>
+</table>
+<ng-pager [pager]="pager" (change)="changePage($event)"></ng-pager>

@@ -1,0 +1,15 @@
+{
+  "name": "ng-pager",
+  "version": "0.0.1",
+  "description": "Paging module for Angular.",
+  "author": "Shihab Ahmed",
+  "homepage": "https://github.com/shihabahmed/NgPagerLibrary",
+  "keywords": [
+    "angular", "ng", "paging", "pager", "pagination"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  }
+}
