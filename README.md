@@ -58,5 +58,5 @@ export  class  YourComponent {
 
 Finally, in the component template file
 ```
-<ng-pager [pager]="pager" (change)="changePage($event)"></ng-pager>
+<ng-pager [pager]="pager" (pageChange)="changePage($event)"></ng-pager>
 ```
