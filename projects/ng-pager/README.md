@@ -28,27 +28,27 @@ import { NgPagerModule } from 'ng-pager';
 
 Then, inside the component
 ```
-import { Pager } from  'ng-pager';
+import { Pager } from 'ng-pager';
     
-export  class  YourComponent {
+export class YourComponent {
     pager: Pager;
 
-    constructor(private  http:  HttpClient) {
-        this.getData(new Pager()).subscribe((res:  any[]) => {
+    constructor(private http: HttpClient) {
+        this.getData(new Pager()).subscribe((res: any[]) => {
             this.pager = new Pager(res.length, 0, 10);
         });
     }
 
-    getData(pager:  Pager): Observable<any> {
+    getData(pager: Pager): Observable<any> {
         return this.http.request('GET', 'DATA_SOURCE', {
             params: {
-                page:  pager.pageIndex.toString(),
-                length:  pager.pageSize.toString()
+                page: pager.pageIndex.toString(),
+                length: pager.pageSize.toString()
             }
         });
     }
 
-    changePage(pager:  Pager) {
+    changePage(pager: Pager) {
         this.getData(pager).subscribe((res: any[]) => {
             this.pager = pager;  // THIS IS IMPORTANT
         });
