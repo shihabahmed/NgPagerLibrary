@@ -2,61 +2,93 @@ import { Component, Input, SimpleChanges, OnChanges, Output, EventEmitter, Eleme
 import { Pager } from './pager.model';
 
 @Component({
-  selector: 'ng-pager',
-  templateUrl: './ng-pager.component.html',
-  styleUrls: ['./ng-pager.component.css']
+    selector: 'ng-pager',
+    templateUrl: './ng-pager.component.html',
+    styleUrls: ['./ng-pager.component.css']
 })
 
 export class NgPagerComponent implements OnChanges {
-  @Output() change: EventEmitter<Pager> = new EventEmitter<Pager>();
+    @Output() pageChange: EventEmitter<Pager> = new EventEmitter<Pager>();
 
-  @Input() pager: Pager;
-  @Input() paged = true;
-  @Input() pageSizes = [
-      //     { text: '2', value: 2 },
-      //     { text: '5', value: 5 },
-      //     { text: '10', value: 10 },
-      //     { text: '20', value: 20 },
-      //     { text: '50', value: 50 },
-      //     { text: '100', value: 100 },
-      //     { text: 'All', value: 0 }
-  ];
+    @Input() pager: Pager;
+    @Input() paged = true;
+    @Input() pageSizes = [
+        //     { text: '2', value: 2 },
+        //     { text: '5', value: 5 },
+        //     { text: '10', value: 10 },
+        //     { text: '20', value: 20 },
+        //     { text: '50', value: 50 },
+        //     { text: '100', value: 100 },
+        //     { text: 'All', value: 0 }
+    ];
 
-  loading = false;
+    loading = false;
 
-  constructor(private el: ElementRef) { }
+    pageInput: HTMLInputElement;
 
-  ngOnChanges(changes: SimpleChanges) {
-      if (changes.pager) {
-          if (!changes.pager.isFirstChange()) {
-              this.pager = changes.pager.currentValue;
-              setTimeout(() => {
-                  this.loading = false;
-              }, 300);
-          }
+    private el: HTMLElement;
+    private minPageNumber = 1;
 
-          if (this.pager.totalRecords > this.pager.pageSize) {
-              this.el.nativeElement.classList.remove('d-none');
-          } else {
-              this.el.nativeElement.classList.add('d-none');
-          }
-      }
-  }
+    constructor(private _el: ElementRef) {
+        this.el = _el.nativeElement;
+    }
 
-  changePageSize(pageSize: number) {
-      this.loading = true;
-      this.change.emit(new Pager(this.pager.totalRecords, 0, pageSize));
-  }
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.pager) {
+            if (!changes.pager.isFirstChange()) {
+                this.pager = changes.pager.currentValue;
+                setTimeout(() => {
+                    this.loading = false;
+                }, 300);
+            }
 
-  changePage(pageIndex: number) {
-      if (pageIndex !== this.pager.pageIndex) {
-          if (pageIndex >= this.pager.pageCount) {
-              pageIndex = this.pager.pageCount - 1;
-          } else if (pageIndex < 0) {
-              pageIndex = 0;
-          }
-          this.loading = true;
-          this.change.emit(new Pager(this.pager.totalRecords, pageIndex, this.pager.pageSize));
-      }
-  }
+            if (this.pager.totalRecords > this.pager.pageSize) {
+                this.el.classList.remove('d-none');
+            } else {
+                this.el.classList.add('d-none');
+            }
+        }
+    }
+
+    changePageSize(pageSize: number) {
+        this.loading = true;
+        this.pageChange.emit(new Pager(this.pager.totalRecords, 0, pageSize));
+    }
+
+    changePage(pageIndex: number) {
+        if (pageIndex !== this.pager.pageIndex) {
+            if (pageIndex >= this.pager.pageCount) {
+                pageIndex = this.pager.pageCount - 1;
+            } else if (pageIndex < 0) {
+                pageIndex = 0;
+            }
+            this.loading = true;
+            this.pageChange.emit(new Pager(this.pager.totalRecords, pageIndex, this.pager.pageSize));
+        }
+    }
+
+    onKeyUp(e) {
+        if (e.keyCode === 86) {
+            if (isNaN(parseFloat(e.target.value))) {
+                e.target.value = '';
+            }
+        }
+
+        if (e.target.value === '' || (+e.target.value < this.minPageNumber)) {
+            e.target.value = this.minPageNumber.toString();
+        }
+
+        if (e.keyCode === 13) {
+            this.changePage(+e.target.value - 1);
+            e.target.blur();
+        }
+    }
+
+    onKeyDown(e) {
+        if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

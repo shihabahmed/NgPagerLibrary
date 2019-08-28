@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pager } from 'projects/ng-pager/src/public_api';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'ng-pager-root',
@@ -14,15 +15,9 @@ export class AppComponent {
     pager: Pager;
 
     constructor(private http: HttpClient) {
-        this.pager = new Pager();
-        this.http.request('GET', './assets/data.json', {
-            params: {
-                page: this.pager.pageIndex.toString(),
-                length: this.pager.pageSize.toString()
-            }
-        }).subscribe((data: any[]) => {
+        this.getData(new Pager()).subscribe((data:  any[]) => {
             this.allChars = data;
-            this.pager = new Pager(this.allChars.length, 0, 5);
+            this.pager = new Pager(data.length, 0, 5);
             this.getChars();
         });
     }
@@ -31,8 +26,18 @@ export class AppComponent {
         this.chars = this.allChars.slice(start, start + this.pager.pageSize);
     }
 
-    changePage(pager: Pager) {
-        this.getChars(pager.pageIndex * pager.pageSize);
-        this.pager = pager;
+    getData(pager:  Pager): Observable<any> {
+        return this.http.request('GET', './assets/data.json', {
+            params: {
+                page:  pager.pageIndex.toString(),
+                length:  pager.pageSize.toString()
+            }
+        });
+    }
+
+    changePage(pager:  Pager) {
+        this.getData(pager).subscribe((data: any[]) => {
+            this.pager = pager;  // THIS IS IMPORTANT
+        });
     }
 }

@@ -29,8 +29,8 @@ Then, inside the component
     	pager: Pager;
 
 		constructor(private  http:  HttpClient) {
-	    	this.getData(new Pager()).subscribe((data:  any[]) => {
-				this.pager = new Pager(this.data.length, 0, 10);
+	    	this.getData(new Pager()).subscribe((res:  any[]) => {
+				this.pager = new Pager(res.length, 0, 10);
 			});
 		}
 
@@ -44,7 +44,7 @@ Then, inside the component
 		}
 
 		changePage(pager:  Pager) {
-			this.getData().subscribe((data: any[]) => {
+			this.getData(pager).subscribe((res: any[]) => {
 				this.pager = pager;  // THIS IS IMPORTANT
 			});
 		}

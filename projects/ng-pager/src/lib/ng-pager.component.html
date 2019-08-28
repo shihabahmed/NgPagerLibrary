@@ -7,8 +7,11 @@
                     <span>&laquo;</span>
                 </button>
             </div>
-            <input #page type="number" [value]="pager.currentPage" class="form-control input-sm weight-500" (focus)="page.select()"
-                (keyup.enter)="changePage(+page.value - 1)" (blur)="page.value = pager.currentPage">
+            <input #page type="text" [value]="pager.currentPage" class="form-control input-sm weight-500"
+                (focus)="page.select()"
+                (blur)="page.value = pager.currentPage"
+                (keyup)="onKeyUp($event)"
+                (keydown)="onKeyDown($event)">
             <div class="input-group-append">
                 <button [disabled]="!pager.hasNext ? true : null" class="btn btn-sm btn-info btn-nav btn-next" [class.disabled]="!pager.hasNext"
                     type="button" (click)="changePage(pager.pageIndex + 1)">
