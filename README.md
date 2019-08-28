@@ -41,7 +41,7 @@ export  class  YourComponent {
 
     getData(pager:  Pager): Observable<any> {
         return this.http.request('GET', 'DATA_SOURCE', {
-	        params: {
+            params: {
                 page:  pager.pageIndex.toString(),
                 length:  pager.pageSize.toString()
             }
