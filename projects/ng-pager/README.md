@@ -33,13 +33,6 @@ import { Pager } from 'ng-pager';
 export class YourComponent {
     pager: Pager;
 
-    pagerCssClasses = {
-        prevButton: 'btn-pager btn-backward',
-        nextButton: 'btn-pager btn-forward',
-        pageNumber: 'text-left',
-        infoText: 'weight-500'
-    };
-
     constructor(private http: HttpClient) {
         this.getData(new Pager()).subscribe((res: any[]) => {
             this.pager = new Pager(res.length, 0, 10);
