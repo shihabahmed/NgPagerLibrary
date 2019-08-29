@@ -1,3 +1,13 @@
+@keyframes roll {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 :host {
     display: block;
 }
@@ -38,7 +48,8 @@
 }
 
 .info,
-.load-more {
+.load-more,
+.loading {
     /* font-family: monospace; */
     font-size: 90%;
     font-weight: 500;
@@ -50,16 +61,29 @@
     margin-top: 2px;
 }
 
+.loading {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #007bff;
+    border-top-color: transparent;
+    border-radius: 100%;
+    animation: roll 2s infinite;
+}
+
 .load-more {
-    line-height: 20px;
+    line-height: 18px;
     text-decoration: none;
     display: inline-block;
-    padding: 12px 5px 0;
+    padding: 10px 5px 0;
     position: relative;
 }
 
 .load-more .fa {
-    line-height: 6px;
+    border: solid;
+    border-width: 0 5px 5px;
+    border-left-color: transparent;
+    border-right-color: transparent;
     position: absolute;
     top: 4px;
     left: 50%;

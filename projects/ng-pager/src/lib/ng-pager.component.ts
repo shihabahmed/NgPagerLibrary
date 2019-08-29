@@ -12,15 +12,12 @@ export class NgPagerComponent implements OnChanges {
 
     @Input() pager: Pager;
     @Input() paged = true;
-    @Input() pageSizes = [
-        //     { text: '2', value: 2 },
-        //     { text: '5', value: 5 },
-        //     { text: '10', value: 10 },
-        //     { text: '20', value: 20 },
-        //     { text: '50', value: 50 },
-        //     { text: '100', value: 100 },
-        //     { text: 'All', value: 0 }
-    ];
+    @Input() cssClasses = {
+        prevButton: '',
+        nextButton: '',
+        pageNumber: '',
+        infoText: ''
+    };
 
     loading = false;
 

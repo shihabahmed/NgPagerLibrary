@@ -33,6 +33,13 @@ import { Pager } from 'ng-pager';
 export class YourComponent {
     pager: Pager;
 
+    pagerCssClasses = {
+        prevButton: 'btn-pager btn-backward',
+        nextButton: 'btn-pager btn-forward',
+        pageNumber: 'text-left',
+        infoText: 'weight-500'
+    };
+
     constructor(private http: HttpClient) {
         this.getData(new Pager()).subscribe((res: any[]) => {
             this.pager = new Pager(res.length, 0, 10);
@@ -59,4 +66,25 @@ export class YourComponent {
 Finally, in the component template file
 ```
 <ng-pager [pager]="pager" (pageChange)="changePage($event)"></ng-pager>
+```
+
+### Customization
+For customization, in the component `.ts` file, put something like the following snippet.
+```
+pagerCssClasses = {
+    prevButton: 'btn-pager btn-backward',
+    nextButton: 'btn-pager btn-forward',
+    pageNumber: 'text-left',
+    infoText: 'weight-500'
+};
+```
+
+Then in the component template file, add the following attribute.
+```
+[cssClasses]="pagerCssClasses"
+```
+
+So final code in the template should be as follows
+```
+<ng-pager [pager]="pager" [cssClasses]="pagerCssClasses" (pageChange)="changePage($event)"></ng-pager>
 ```

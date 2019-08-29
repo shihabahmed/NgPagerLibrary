@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pager } from 'projects/ng-pager/src/public_api';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'ng-pager-root',
@@ -9,35 +10,33 @@ import { Observable } from 'rxjs';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'ng-pager';
-    allChars: any[];
-    chars: any[];
     pager: Pager;
+    title = 'ng-pager';
+    chars: any[];
 
     constructor(private http: HttpClient) {
-        this.getData(new Pager()).subscribe((data:  any[]) => {
-            this.allChars = data;
-            this.pager = new Pager(data.length, 0, 5);
-            this.getChars();
+        this.getData(new Pager(0, 0, 5)).subscribe((res: any) => {
+            this.chars = res.data;
+            this.pager = res.pager;
         });
     }
 
-    getChars(start = 0) {
-        this.chars = this.allChars.slice(start, start + this.pager.pageSize);
+    getData(pager: Pager): Observable<any> {
+        return this.http.request('GET', './assets/data.json').pipe(
+            map((x: any[]) => {
+                const start = pager.pageIndex * pager.pageSize;
+                return {
+                    data: x.slice(start, start + pager.pageSize),
+                    pager: new Pager(x.length, pager.pageIndex, pager.pageSize)
+                };
+            })
+        );
     }
 
-    getData(pager:  Pager): Observable<any> {
-        return this.http.request('GET', './assets/data.json', {
-            params: {
-                page:  pager.pageIndex.toString(),
-                length:  pager.pageSize.toString()
-            }
-        });
-    }
-
-    changePage(pager:  Pager) {
-        this.getData(pager).subscribe((data: any[]) => {
-            this.pager = pager;  // THIS IS IMPORTANT
+    changePage(pager: Pager) {
+        this.getData(pager).subscribe((res: any) => {
+            this.chars = res.data;
+            this.pager = res.pager;
         });
     }
 }
