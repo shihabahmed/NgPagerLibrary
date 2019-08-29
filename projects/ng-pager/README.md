@@ -56,13 +56,20 @@ export class YourComponent {
 }
 ```
 
-Finally, in the component template file
+Finally, in the component template file:
 ```
 <ng-pager [pager]="pager" (pageChange)="changePage($event)"></ng-pager>
 ```
 
 ### Customization
-For customization, in the component `.ts` file, put something like the following snippet.
+For `load more` style paging, add the following attribute to the `ng-pager` element:
+```
+[paged]="false"
+```
+
+#### Further customization for the paged style...
+
+For customization of the `paged` style, in the component `.ts` file, put something like the following snippet:
 ```
 pagerCssClasses = {
     prevButton: 'btn-pager btn-backward',
@@ -72,12 +79,12 @@ pagerCssClasses = {
 };
 ```
 
-Then in the component template file, add the following attribute.
+Then in the component template file, add the following attribute:
 ```
 [cssClasses]="pagerCssClasses"
 ```
 
-So final code in the template should be as follows
+So final code in the template should be as follows:
 ```
 <ng-pager [pager]="pager" [cssClasses]="pagerCssClasses" (pageChange)="changePage($event)"></ng-pager>
 ```
