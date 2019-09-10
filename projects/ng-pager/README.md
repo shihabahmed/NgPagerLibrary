@@ -6,7 +6,6 @@
 npm install ng-pager --save
 ```
 
- 
 ### Pager Model
 ```
 Pager pager = new Pager(totalRecords?: number, pageIndex?: number, pageSize?: number);
@@ -14,7 +13,7 @@ Pager pager = new Pager(totalRecords?: number, pageIndex?: number, pageSize?: nu
 
 ### Usage
 
-In `app.module.ts` add the following code
+In the module file (the one that declares the component inside which you'll be using `ng-pager`) add the following code
 ```
 import { NgPagerModule } from 'ng-pager';
 
