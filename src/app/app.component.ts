@@ -13,6 +13,7 @@ export class AppComponent {
     pager: Pager;
     title = 'ng-pager';
     chars: any[];
+    disablePager = false;
 
     constructor(private http: HttpClient) {
         this.getData(new Pager(0, 0, 5)).subscribe((res: any) => {

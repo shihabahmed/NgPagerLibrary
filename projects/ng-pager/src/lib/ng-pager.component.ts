@@ -12,6 +12,7 @@ export class NgPagerComponent implements OnChanges {
 
     @Input() pager: Pager;
     @Input() paged = true;
+    @Input() disabled = false;
     @Input() cssClasses = {
         prevButton: '',
         nextButton: '',
@@ -32,17 +33,11 @@ export class NgPagerComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.pager) {
-            if (!changes.pager.isFirstChange()) {
+            if (!changes.pager.firstChange) {
                 this.pager = changes.pager.currentValue;
                 setTimeout(() => {
                     this.loading = false;
                 }, 300);
-            }
-
-            if (this.pager.totalRecords > this.pager.pageSize) {
-                this.el.classList.remove('d-none');
-            } else {
-                this.el.classList.add('d-none');
             }
         }
     }

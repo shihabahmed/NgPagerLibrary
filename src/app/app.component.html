@@ -4,4 +4,4 @@
         <td>{{char.char}}</td>
     </tr>
 </table>
-<ng-pager [pager]="pager" (pageChange)="changePage($event)"></ng-pager>
+<ng-pager [pager]="pager" [disabled]="disablePager" (pageChange)="changePage($event)"></ng-pager>

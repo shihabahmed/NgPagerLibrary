@@ -1,8 +1,8 @@
-<ng-container *ngIf="pager.totalRecords > pager.pageSize">
+<ng-container *ngIf="pager && pager.totalRecords > pager.pageSize">
     <ng-container *ngIf="paged">
         <div class="input-group">
             <div class="input-group-prepend">
-                <button [disabled]="!pager.hasPrevious ? true : null" class="btn btn-sm btn-info btn-nav btn-prev {{cssClasses.prevButton}}" [class.disabled]="!pager.hasPrevious"
+                <button [disabled]="(!pager.hasPrevious || loading || disabled) ? true : null" class="btn btn-sm btn-info btn-nav btn-prev {{cssClasses.prevButton}}" [class.disabled]="!pager.hasPrevious"
                     type="button" (click)="changePage(pager.pageIndex - 1)">
                     <span>&laquo;</span>
                 </button>
@@ -11,9 +11,10 @@
                 (focus)="page.select()"
                 (blur)="page.value = pager.currentPage"
                 (keyup)="onKeyUp($event)"
-                (keydown)="onKeyDown($event)">
+                (keydown)="onKeyDown($event)"
+                [disabled]="(loading || disabled) ? true : null">
             <div class="input-group-append">
-                <button [disabled]="!pager.hasNext ? true : null" class="btn btn-sm btn-info btn-nav btn-next {{cssClasses.nextButton}}" [class.disabled]="!pager.hasNext"
+                <button [disabled]="(!pager.hasNext || loading || disabled) ? true : null" class="btn btn-sm btn-info btn-nav btn-next {{cssClasses.nextButton}}" [class.disabled]="!pager.hasNext"
                     type="button" (click)="changePage(pager.pageIndex + 1)">
                     <span>&raquo;</span>
                 </button>
