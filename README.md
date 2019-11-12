@@ -31,6 +31,7 @@ import { Pager } from 'ng-pager';
     
 export class YourComponent {
     pager: Pager;
+    disablePager = false; // You can disable pager in certain situations.
 
     constructor(private http: HttpClient) {
         this.getData(new Pager()).subscribe((res: any[]) => {
@@ -57,16 +58,16 @@ export class YourComponent {
 
 Finally, in the component template file:
 ```
-<ng-pager [pager]="pager" (pageChange)="changePage($event)"></ng-pager>
+<ng-pager [pager]="pager" [disabled]="disablePager" (pageChange)="changePage($event)"></ng-pager>
 ```
 
 ### Customization
 For `load more` style paging, add the following attribute to the `ng-pager` element:
 ```
-[paged]="false"
+[paged]="false" // Default: true
 ```
 
-#### Further customization
+#### Further customization for the paged style...
 
 For customization of the `paged` style, in the component `.ts` file, put something like the following snippet:
 ```
