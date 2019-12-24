@@ -27,7 +27,7 @@
     <div *ngIf="!paged && pager.hasNext" class="load-more-wrapper text-center">
         <span *ngIf="loading" class="loading"></span>
         <a *ngIf="!loading" href="javascript:;" class="load-more" (click)="changePage(pager.pageIndex + 1)">
-            <i class="fa fa-caret-up"></i>
+            <i class="arrow"></i>
             Load more
         </a>
     </div>
