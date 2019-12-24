@@ -79,7 +79,7 @@
     position: relative;
 }
 
-.load-more .icon {
+.load-more .arrow {
     border: solid;
     border-width: 0 5px 5px;
     border-left-color: transparent;
@@ -91,6 +91,6 @@
     transition: top 0.3s;
 }
 
-.load-more:hover .icon {
+.load-more:hover .arrow {
     top: 1px;
 }
