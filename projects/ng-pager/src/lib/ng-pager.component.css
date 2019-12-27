@@ -9,12 +9,13 @@
 }
 
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 :host .input-group {
     width: 150px;
-    margin: auto;
 }
 
 .btn.disabled {
