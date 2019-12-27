@@ -72,6 +72,10 @@
     animation: spin 2s infinite;
 }
 
+.load-more-wrapper {
+    margin: auto;
+}
+
 .load-more {
     line-height: 18px;
     text-decoration: none;

@@ -1,6 +1,6 @@
-<div class="text-center my-3">
+<div class="text-center m-3">
     Pager style &nbsp;
-    <select style="width:150px;" (change)="changePagerStyle($event.target.value)">
+    <select class="custom-select" style="width:150px;" (change)="changePagerStyle($event.target.value)">
         <option value="1">Paged</option>
         <option value="0">Load more</option>
     </select>
@@ -28,4 +28,6 @@
     </table>
 </div>
 
-<ng-pager [pager]="pager" [paged]="paged" [disabled]="disablePager" (pageChange)="changePage($event)"></ng-pager>
+<div class="m-3">
+    <ng-pager class="flex-row justify-content-between" [pager]="pager" [paged]="paged" [disabled]="disablePager" (pageChange)="changePage($event)"></ng-pager>
+</div>
