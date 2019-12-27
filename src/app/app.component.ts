@@ -18,6 +18,10 @@ export class AppComponent {
     disablePager = false;
 
     constructor(private http: HttpClient) {
+        this.loadFirstPage();
+    }
+
+    loadFirstPage() {
         this.getData(new Pager(0, 0, 5)).subscribe((res: any) => {
             this.chars = res.data;
             this.pager = res.pager;
@@ -44,6 +48,7 @@ export class AppComponent {
     }
 
     changePagerStyle(paged) {
+        this.loadFirstPage();
         this.paged = paged == '1';
     }
 }
