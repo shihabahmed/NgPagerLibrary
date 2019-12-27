@@ -6,24 +6,26 @@
     </select>
 </div>
 
-<table class="table table-bordered text-center m-3">
-    <thead>
-        <tr>
-            <th rowspan="2" class="align-middle" style="width:20%;">#</th>
-            <th colspan="2">Letter</th>
-        </tr>
-        <tr>
-            <th style="font-weight:400;">Uppercase</th>
-            <th style="font-weight:400;">Lowercase</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let char of chars">
-            <td>{{char.pos}}</td>
-            <td>{{char.char}}</td>
-            <td>{{char.char.toLowerCase()}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="m-3">
+    <table class="table table-bordered text-center">
+        <thead class="table-info">
+            <tr>
+                <th rowspan="2" class="align-middle" style="width:20%;">#</th>
+                <th colspan="2">Letter</th>
+            </tr>
+            <tr>
+                <th style="font-weight:400;">Uppercase</th>
+                <th style="font-weight:400;">Lowercase</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let char of chars">
+                <td>{{char.pos}}</td>
+                <td>{{char.char}}</td>
+                <td>{{char.char.toLowerCase()}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <ng-pager [pager]="pager" [paged]="paged" [disabled]="disablePager" (pageChange)="changePage($event)"></ng-pager>
