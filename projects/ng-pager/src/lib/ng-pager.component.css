@@ -1,4 +1,4 @@
-@keyframes roll {
+@keyframes spin {
     0% {
         transform: rotate(0);
     }
@@ -68,7 +68,7 @@
     border: 2px solid #007bff;
     border-top-color: transparent;
     border-radius: 100%;
-    animation: roll 2s infinite;
+    animation: spin 2s infinite;
 }
 
 .load-more {
@@ -79,7 +79,7 @@
     position: relative;
 }
 
-.load-more .fa {
+.load-more .arrow {
     border: solid;
     border-width: 0 5px 5px;
     border-left-color: transparent;
@@ -91,6 +91,6 @@
     transition: top 0.3s;
 }
 
-.load-more:hover .fa {
+.load-more:hover .arrow {
     top: 1px;
 }
