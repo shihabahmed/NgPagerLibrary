@@ -1,7 +1,29 @@
-<table>
-    <tr *ngFor="let char of chars">
-        <td>{{char.pos}}</td>
-        <td>{{char.char}}</td>
-    </tr>
+<div class="text-center my-3">
+    Pager style &nbsp;
+    <select style="width:150px;" (change)="changePagerStyle($event.target.value)">
+        <option value="1">Paged</option>
+        <option value="0">Load more</option>
+    </select>
+</div>
+
+<table class="table table-bordered text-center m-3">
+    <thead>
+        <tr>
+            <th rowspan="2" class="align-middle">#</th>
+            <th colspan="2">Letter</th>
+        </tr>
+        <tr>
+            <th style="font-weight:400;">Uppercase</th>
+            <th style="font-weight:400;">Lowercase</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let char of chars">
+            <td>{{char.pos}}</td>
+            <td>{{char.char}}</td>
+            <td>{{char.char.toLowerCase()}}</td>
+        </tr>
+    </tbody>
 </table>
-<ng-pager [pager]="pager" [disabled]="disablePager" (pageChange)="changePage($event)"></ng-pager>
+
+<ng-pager [pager]="pager" [paged]="paged" [disabled]="disablePager" (pageChange)="changePage($event)"></ng-pager>

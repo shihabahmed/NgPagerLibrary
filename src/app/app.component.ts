@@ -9,9 +9,11 @@ import { map } from 'rxjs/operators';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
     pager: Pager;
     title = 'ng-pager';
+    paged = true;
     chars: any[];
     disablePager = false;
 
@@ -36,8 +38,12 @@ export class AppComponent {
 
     changePage(pager: Pager) {
         this.getData(pager).subscribe((res: any) => {
-            this.chars = res.data;
+            this.chars = this.paged ? res.data : this.chars.concat(res.data);
             this.pager = res.pager;
         });
+    }
+
+    changePagerStyle(paged) {
+        this.paged = paged == '1';
     }
 }
