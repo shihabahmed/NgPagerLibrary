@@ -1,7 +1,7 @@
 
 # NgPager
 
-Demo: https://gqairmxqb.github.stackblitz.io
+Demo: https://ng-pager.stackblitz.io
 
 ### Installation
 ```
