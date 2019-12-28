@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Pager } from 'projects/ng-pager/src/public_api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+import { Pager } from '../../projects/ng-pager/src/public_api';
 
 @Component({
     selector: 'ng-pager-root',

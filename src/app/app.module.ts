@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { NgPagerModule } from 'projects/ng-pager/src/public_api';
-
+import { NgPagerModule } from '../../projects/ng-pager/src/public_api';
 
 @NgModule({
     declarations: [
@@ -20,4 +19,5 @@ import { NgPagerModule } from 'projects/ng-pager/src/public_api';
     providers: [],
     bootstrap: [AppComponent]
 })
+
 export class AppModule { }
