@@ -1,6 +1,8 @@
 
 # NgPager
-  
+
+Demo: https://gqairmxqb.github.stackblitz.io
+
 ### Installation
 ```
 npm install ng-pager --save
